@@ -5,7 +5,7 @@ const sleep = (seconds) =>
 
 const puppeteer = require("puppeteer");
 
-const getRecommendation = async (url, count, cookies =  []) => {
+const getRecommendation = async (url, count, cookies =  [], delay = 1) => {
   const browser = await puppeteer.launch({
     headless: false, // Launch in non-headless mode
     slowMo: 50, // Slow down the automation by 50ms per step
@@ -37,7 +37,7 @@ const getRecommendation = async (url, count, cookies =  []) => {
         window.scrollBy(0, window.innerHeight * 2);
       }
     });
-    await sleep(2);
+    await sleep(delay ?? 2);
     // Wait for the new recommended videos to load
     await page.waitForFunction(
       (prevCount) => {
