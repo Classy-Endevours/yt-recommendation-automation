@@ -8,8 +8,8 @@ router.get("/", async function (req, res, next) {
 });
 
 router.post("/", async function (req, res, next) {
-  const { url, count } = req.body;
-  const recommendation = await getRecommendation(url, count);
+  const { url, count, cookies } = req.body;
+  const recommendation = await getRecommendation(url, count, cookies);
   res.status(200).send(recommendation.slice(0, count));
 });
 

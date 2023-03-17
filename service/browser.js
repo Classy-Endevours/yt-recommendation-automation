@@ -5,7 +5,7 @@ const sleep = (seconds) =>
 
 const puppeteer = require("puppeteer");
 
-const getRecommendation = async (url, count) => {
+const getRecommendation = async (url, count, cookies =  []) => {
   const browser = await puppeteer.launch({
     headless: false, // Launch in non-headless mode
     slowMo: 50, // Slow down the automation by 50ms per step
@@ -13,6 +13,9 @@ const getRecommendation = async (url, count) => {
   });
 
   const page = await browser.newPage();
+  if(cookies.length){
+    await page.setCookie(...cookies);
+  }
   await page.setViewport({
     width: 1720,
     height: 1080,
